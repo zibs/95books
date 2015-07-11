@@ -2,7 +2,7 @@ module NinetyfiversHelper
 	require 'mechanize'
 	require 'nokogiri'
 	# look into named_captures
-	AUTHOR = /(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)(([a-zA-Z,.'-]+\s?){1,3})/
+	AUTHOR     = /(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)(([a-zA-Z,.'-]+\s?){1,3})/
 	BOOK_TITLE = /(([a-zA-Z,.'-]+\s?){1,4})(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)/
 
 		# 
@@ -10,11 +10,17 @@ module NinetyfiversHelper
 		 	@client.search('#95books').each do |tweet|
 		 		@tweet_user    = tweet.user.name
 		 		@tweet_content = tweet.text
-				@new_reader = Reader.create(name: @tweet_user, tweet_content: [@tweet_content]) unless Reader.exists?(name: @tweet_user)
-				# make case where we have to upsert tweet content
-				
+
+		 		if Reader.exists?(name: @tweet_user)
+						@reader  = Reader.find_by(name: @tweet_user)
+						@reader.tweet_content_will_change!	
+					  	@reader.tweet_content<<@tweet_content
+					  	@reader.save
+				else @reader  = Reader.create(name: @tweet_user, tweet_content: [@tweet_content])	  
+				end
 		end
 	end
+
 
 	def collect_books 	
 
