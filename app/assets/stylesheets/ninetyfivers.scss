@@ -1,3 +1,222 @@
 // Place all the styles related to the Ninetyfivers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: font-url("Roboto-Thin.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-ThinItalic';
+    src: font-url("Roboto-ThinItalic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto-MediumItalic';
+    src: font-url("Roboto-MediumItalic.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+.logo-wrap {
+    margin-top: 5%;
+    padding: 10vh 20vh 20vh 20vh;
+    border-radius: 10px;
+    background: rgba(84,110,122 ,0.8);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+$logo-colors: rgba(48,79,254 ,1);
+.logo {
+    background-color:$logo-colors;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#logo-text {
+    font-family: "Roboto-Thin";
+    font-size: 12em;
+    color: white;
+    text-align: right;
+}
+
+$tagline: rgba(64, 255, 163, 1);
+
+#tagline {
+    font-family: "Roboto-ThinItalic";
+    font-size: 1.3em;
+    color: white;
+    display: inline-block;
+    float: right;
+    padding: 0.3em 0.5em 0.3em 0.5em;
+
+    background-color: $tagline;
+    border-radius: 5px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.stats-wrap {
+	margin-top: 5%;
+	margin: 5% auto 0 auto;
+	font-size: 1.25em;
+	border-radius: 4px;
+	padding: 4vh;
+	width: 90%;
+    background: rgba(120,144,156, 0.6);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    font-family: "Roboto-Thin";
+	color: white;
+}
+
+$stats: rgba(233,30,99 ,1);
+
+.reader-stats {
+	background-color: $stats;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+.book-stats {
+	background-color: $stats;
+    border-radius: 10px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+}
+// color background
+.reader-display-wrap {
+    margin-top: 5%;
+	border-radius: 8px;	
+	background: rgba(84,110,122 ,0.3);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+// position elements
+.reader-row {
+    width: 100%;
+    margin: 5% auto 0 auto;
+    padding-left:5%;
+
+}
+// display readers
+.reader-display {
+    color: black;
+    margin-top: 2em;
+    padding: 2em 0 2em 2em;
+    border-radius: 10px; 
+    // background color
+    background: rgba(245,0,87 ,0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    
+    .reader-name {
+        font-family: "Roboto-MediumItalic";
+        font-size: 1.5em;
+        }
+    .book-title {}
+    .author-title {}
+    .publishing-house {}
+}
+
+// BEGIN READER CARDS
+// light-blue
+.reader-display:nth-child(2n) {
+      background: rgba(0,176,255 ,0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+// mint
+.reader-display:nth-child(3n) {
+      background: rgba(29,233,182 ,0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+// bright-green
+.reader-display:nth-child(4n) {
+      background: rgba(118,255,3 ,0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    
+}
+// light-purp
+.reader-display:nth-child(5n) {
+      background: rgba(213,0,249 ,0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    
+}
+// deepblue
+.reader-display:nth-child(6n) {
+      background: rgba(61,90,254, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    
+}
+// orange
+.reader-display:nth-child(7n) {
+      background: rgba(255,145,0, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+    
+}
+// yellow
+.reader-display:nth-child(8n)  {
+    background: rgba(255,234,0, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+// blurple
+
+.reader-display:nth-child(9n)  {
+    background: rgba(101,31,255, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+// redorange
+.reader-display:nth-child(10n)  {
+    background: rgba(255,61,0, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+// light-purp
+.reader-display:nth-child(11n)  {
+    background: rgba(0,229,255, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+// golder
+.reader-display:nth-child(12n)  {
+    background: rgba(255,145,0 ,1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.reader-display:nth-child(13n) {
+    background: rgba(0,230,118, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.reader-display:nth-child(14n)  {
+    background: rgba(118,255,3, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.reader-display:nth-child(15n)  {
+    background: rgba(198,255,0, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.reader-display:nth-child(16n)  {
+    background: rgba(255,145,0, 0.7);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
