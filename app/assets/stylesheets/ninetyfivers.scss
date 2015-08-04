@@ -63,7 +63,7 @@ $tagline: rgba(64, 255, 163, 1);
     color: white;
     display: inline-block;
     float: right;
-    padding: 0.6em 0.9em 0.4em 0.9em;
+    padding: 0.4em 0.9em 0.4em 0.9em;
 
     background-color: $tagline;
     border-radius: 5px;
@@ -118,7 +118,7 @@ $stats: rgba(233,30,99 ,1);
     padding: 2em 0 2em 2em;
     border-radius: 10px; 
     // background color
-    background: rgba(245,0,87 ,0.9);
+    background: rgba(255, 221, 0, 0.9);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     
     .reader-name {
@@ -173,7 +173,7 @@ $stats: rgba(233,30,99 ,1);
 }
 // yellow
 .reader-display:nth-child(8n)  {
-    background: rgba(255,234,0, 0.9);
+    background: rgba(245,0,87, 0.9);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 // blurple
@@ -249,10 +249,7 @@ html {
   position: relative;
   min-height: 100%;
 }
-body {
-  /* Margin bottom by footer height */
-  
-}
+
 .footer {
   position: relative;
   margin-top: 5%;
@@ -262,12 +259,35 @@ body {
   height: 60px;
   color: white;
 }
-.footer-details {
-    padding: 3vh;
+.footer-details-wrap {
+    padding: 5%;
     border-radius: 10px;
     background-color: grey;
     color: black;
 }
+
+.footer-details {
+    font-family: "Open Sans", sans-serif;
+    border-radius: 10px;
+    color: white;
+    padding: 3% 3% 7% 3%;
+    background: rgba(20,20, 20 ,0.8);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+        a {
+            color: white;
+            font-weight: bolder;
+            // text-decoration: underline;
+            &:hover {
+            
+            }
+        }
+}
+         p {
+            line-height: 0.9em;
+            font-size: 1.1em;
+            letter-spacing: 0.03em;
+            font-weight: light;
+        }
 
 
 

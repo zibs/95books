@@ -5,9 +5,9 @@
 			<section class ="col-md-6 reader-display text-center">
 			<h4><span class="reader-name">					<%= @reader.name %></span> is reading</h4>
 			<ul>
-				<li class = "book-title">					<%= @reader.books.last.title %></li>
-				<li> by <span class="author-title"> 		<%= @reader.books.last.author %></span></li>
-				<li class = "publishing-house"> 			<%= @reader.books.last.publisher %></li>
+				<li class = "book-title">					<%= @reader.latest_book.title %></li>
+				<li> by <span class="author-title"> 		<%= @reader.latest_book.author %></span></li>
+				<li class = "publishing-house"> 			<%= @reader.latest_book.publisher %></li>
 			</ul>
 			</section>
 
