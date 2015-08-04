@@ -2,10 +2,10 @@ class NinetyfiversController < ApplicationController
 	
 
 	def index 
-
-		@all_readers     = Reader.all 
-		@books           = Book.all
-		@grouped_readers = @all_readers.in_groups_of(2, false)
+		@all_readers = Reader.select("readers.*").joins(:books).group("readers.id").having("count(books.id) >= ?", 1).includes(:latest_book).all
+		@paged_readers = @all_readers.paginate(:page => params[:page], :per_page => 15)			
+		# @books           = Book.all
+		# @grouped_readers = @all_readers.in_groups_of(2, false)
 
 		# TWITTER AUTHORIZATION
 		@twitter_client = Twitter::REST::Client.new do |config|
@@ -15,13 +15,12 @@ class NinetyfiversController < ApplicationController
 			 config.access_token_secret = ENV["YOUR_ACCESS_SECRET"]
 		end
 		
-	# Eventually will be my backgroundjob
+	
 		# collect_readers
 		# collect_books
-
+		# selective_book_search(" Chroniques de Jérusalem by Guy Delisle.",49)
+		# collect_books_each_tweet_of_reader(21)
 	end
 
 end
 
-
-# https://github.com/javan/whenever

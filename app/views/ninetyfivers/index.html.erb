@@ -1,37 +1,19 @@
 <section class="row reader-row">
-<% @grouped_readers.each do |reader| %>
+<% @paged_readers.each do |reader| %>
+   <% @reader = reader %>
 
-	<% @reader_one = reader[0] %>
-	<% @reader_two = reader[1] %>
-	
-		<% unless @reader_one.books.empty? %>
-			
-			<section class ="col-md-4 col-md-offset-1 reader-display">
-				<% unless @reader_one.books.last.displayable %> 
-			<h4><span class="reader-name">		<%= @reader_one.name %></span> is reading</h4>
+			<section class ="col-md-6 reader-display text-center">
+			<h4><span class="reader-name">					<%= @reader.name %></span> is reading</h4>
 			<ul>
-				<li class = "book-title">		<%= @reader_one.books.last.title %></li>
-				<li class = "author-title"> 	<%=	@reader_one.books.last.author %></li>
-				<li class = "publishing-house"> <%= @reader_one.books.last.publisher %></li>
+				<li class = "book-title">					<%= @reader.books.last.title %></li>
+				<li> by <span class="author-title"> 		<%= @reader.books.last.author %></span></li>
+				<li class = "publishing-house"> 			<%= @reader.books.last.publisher %></li>
 			</ul>
-				<% end %>
 			</section>
-		<% end %>
 
-<% next if @reader_two.nil? %>
+<% end %>
+</section>
 
-		<% unless @reader_two.books.empty? %>
-			<section class="col-md-4 col-md-offset-1 reader-display">
-				<% unless @reader_two.books.last.displayable %>
-					<h4><span class="reader-name">		<%= @reader_two.name %></span> is reading</h4>
-					<ul>
-						<li class = "book-title">		<%= @reader_two.books.last.title %></li>
-						<li class = "author-title"> 	<%=	@reader_two.books.last.author %></li>
-						<li class = "publishing-house"> <%= @reader_two.books.last.publisher %></li>
-					</ul>
-					<% end %>
-					</section>
-					<% end %>
-				
-		<% end %>
+<section class= "row pagination-wrapper text-center">
+	<%= will_paginate @paged_readers %>
 </section>

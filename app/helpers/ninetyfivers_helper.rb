@@ -26,23 +26,36 @@ module NinetyfiversHelper
 			end	
 	end
 
+	def selective_book_search(tweet_content, reader_id)
+		@reader = Reader.find_by(id: reader_id)
+		if webscrape_possible(tweet_content)
+			# if book_exists?(@book_title_match, @author_match)
+				# create_saved_book_relation(@book_title_match, @author_match)
+			# end
+			webscrape_publishing_house(@book_title_match, @author_match)
+			hash_book(@book_title_match, @author_match)
+			@reader.books.create(author: @author_match, title: @book_title_match, publisher: @publisher,
+										 								hashed_book: @hashed_book, displayable: false)
+	end
+end
+	
+
+
 	def collect_books 	
 		@all_readers.each do |reader|
-			# Consider turning this into an each loop to go through the whole collection of tweets? 
+
 			@hashtag_tweet=reader.tweet_content.last
 
 				if webscrape_possible(@hashtag_tweet)
 					# check if book already exists and save if so.
 					if book_exists?(@book_title_match, @author_match)
-						@saved_book = Book.find_by(title: @book_title_match, author: @author_match)
-						reader.books<<@saved_book
+					   create_saved_book_relation(@book_title_match, @author_match)	
 					end
 					# webscrape for publisher, hash, and save. 
 					webscrape_publishing_house(@book_title_match, @author_match)
 					hash_book(@book_title_match, @author_match)
 					reader.books.create(author: @author_match, title: @book_title_match, publisher: @publisher,
-										 								hashed_book: @hashed_book, displayable: false)
-				 
+										 								hashed_book: @hashed_book, displayable: false)	 
 			end
 		end
 	end
@@ -72,8 +85,10 @@ module NinetyfiversHelper
 		 hashtag_tweet.match(BOOK_TITLE)
 		end
 
-	
-
+	def create_saved_book_relation(book_title_match, author_match)
+		# @saved_book = Book.find_by(title: @book_title_match, author: @author_match)
+		# @reader.books<<@saved_book
+	end
 
 	def webscrape_publishing_house(title_of_book, author_of_book)
 		a = Mechanize.new { |agent|
