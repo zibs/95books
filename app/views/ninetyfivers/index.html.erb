@@ -1,3 +1,24 @@
+<!-- Begin Header -->
+<header class="container">
+	<section class="logo-wrap">
+		<section class="logo">
+			<h1 id = "logo-text">#95BOOKS</h1>
+		</section>	
+		<section class = "tagline-wrap">
+			<h4><span id = "tagline">what you're reading</span></h4>
+		</section>
+	</section>
+	<article class="row stats-wrap">
+		<section class="reader-stats col-md-3 col-md-offset-2">
+			<h4>CURRENT READERS: <%= Reader.all.length %></h4>
+		</section>
+		<section class="book-stats col-md-3 col-md-offset-2">
+			<h4>BOOKS READ: <%= Book.all.length %></h4>
+		</section>
+	</section>
+</header>	
+<!-- Begin Reader Displays -->
+<main class="container reader-display-wrap">
 <section class="row reader-row">
 <% @paged_readers.each do |reader| %>
    <% @reader = reader %>
@@ -13,7 +34,8 @@
 
 <% end %>
 </section>
-
 <section class= "row pagination-wrapper text-center">
 	<%= will_paginate @paged_readers %>
 </section>
+</main>
+<!-- Begin footer -->
