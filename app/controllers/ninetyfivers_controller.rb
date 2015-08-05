@@ -16,5 +16,7 @@ class NinetyfiversController < ApplicationController
 		# selective_book_search(" Chroniques de Jérusalem by Guy Delisle.",49)
 		# collect_books_each_tweet_of_reader(21)
 	end
+	def answers
+	end
 end
 

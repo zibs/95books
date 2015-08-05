@@ -4,9 +4,6 @@ class Reader < ActiveRecord::Base
 	validates :tweet_content,  presence: true
 	has_one :latest_book, -> { displayable.order(id: :desc).limit(1) },
 		class_name: "Book"
-
-
-
 end
 
 

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'ninetyfivers#index'
+  get 'answers' =>  'ninetyfivers#answers'
   resources :ninetyfivers
 
   # Example of regular route:
