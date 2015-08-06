@@ -10,6 +10,6 @@ class CreateBooks < ActiveRecord::Migration
       t.timestamps null: false
     end
     # 
-    add_index :books, :reader_id
+    # add_index :books, :reader_id
   end
 end
