@@ -23,7 +23,7 @@ RailsAdmin.config do |config|
       end
     end
   end
-
+  
   config.authorize_with do
     authenticate_or_request_with_http_basic('Site Message') do |username, password|
       username == ENV["ADMIN"] && password == ENV["ADMINPASS"]
