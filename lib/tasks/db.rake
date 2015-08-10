@@ -37,7 +37,7 @@ namespace :db do
   end
 
   desc "Dump latest database and upload to AWS"
-  task :dump_and_upload => [:dump, :upload_aws] => :environment  do
+  task :dump_and_upload => [:dump, :upload_aws]  do
   end
 
 
