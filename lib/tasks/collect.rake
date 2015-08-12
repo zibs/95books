@@ -3,7 +3,11 @@ namespace :collect do
 desc "Collects all new Readers"
 
 	task :new_readers => :environment do
-		# TWITTER AUTHORIZATION
+
+	AUTHOR     = /(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)(([a-zA-Z,.'-]+\s?){1,3})/
+	BOOK_TITLE = /(([a-zA-Z,.'-]+\s?){1,4})(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)/
+
+	# TWITTER AUTHORIZATION
 		@twitter_client = Twitter::REST::Client.new do |config|
 			 config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
 			 config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
@@ -11,6 +15,7 @@ desc "Collects all new Readers"
 			 config.access_token_secret = ENV["TWITTER_ACCESS_SECRET"]
 		end
 
+	# COLLECT READERS
 		def collect_readers
 		 	@twitter_client.search('#95books').each do |tweet|
 		 		@tweet_user    = tweet.user.name
@@ -29,8 +34,7 @@ desc "Collects all new Readers"
 			end	
 		end
 
-	AUTHOR     = /(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)(([a-zA-Z,.'-]+\s?){1,3})/
-	BOOK_TITLE = /(([a-zA-Z,.'-]+\s?){1,4})(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)/
+	# COLLECTBOOKS
 
 	def collect_books 	
 		Reader.all.each do |reader|
@@ -50,6 +54,7 @@ desc "Collects all new Readers"
 			end
 		end
 	end
+
 
 	def hash_book(book_title, author)
 		 @hashed_book = Digest::MD5.hexdigest("#{book_title} #{author}") 
@@ -89,31 +94,33 @@ desc "Collects all new Readers"
 			 search_results = page.form_with(:name => 'f') do |search|
 		     search.q="#{title_of_book} by #{author_of_book} Amazon"
 		  end.submit
-		  if search_results.link_with(:text=> /(Amazon.ca|Amazon.com #{Regexp.quote(title_of_book)} #{Regexp.quote(author_of_book)})/)
-		   amazon_result = search_results.link_with(:text=> /(Amazon.ca|Amazon.com #{Regexp.quote(title_of_book)}-#{Regexp.quote(author_of_book)})/).click 
-		   if amazon_result.uri.to_s.match(/.ca/) && amazon_result.search("#detail_bullets_id").at("li:contains('Publisher:')")
-	    		@publisher = amazon_result.search("#detail_bullets_id").at("li:contains('Publisher:')").text 	
-	    	elsif amazon_result.link_with(:text=>/#{Regexp.quote(title_of_book)}/)
-	    		inner_amazonca = amazon_result.link_with(:text=>/#{Regexp.quote(title_of_book)}/).click
-	    		begin
-	    		@publisher = inner_amazonca.search("#detail_bullets_id").at("li:contains('Publisher:')").text
-	    		rescue NoMethodError
-	    		@publisher = "exception handled"
-	    		end
-	    	elsif 
-	    		amazon_result.uri.to_s.match(/.com/) && amazon_result.search("#detail-bullets").at("li:contains('Publisher: ')")
-	    		@publisher = amazon_result.search("#detail-bullets").at("li:contains('Publisher:')").text 	
-	    	elsif amazon_result.uri.to_s.match(/.com/) &&  amazon_result.link_with(:text=>/#{Regexp.quote(title_of_book)}/)
-	    			inner_amazoncom = amazon_result.link_with(:text=>/#{Regexp.quote(title_of_book)}/).click
-	    		@publisher = inner_amazoncom.search("#detail-bullets").at("li:contains('Publisher:')").text 	
-	    	else
-	    		@publisher = "undiggable!"
-	    	end
-	    else @publisher = "Google initial search ain't panning"
+		  if 	search_results.link_with(:text=> /(Amazon.ca|Amazon.com #{Regexp.quote(title_of_book)} #{Regexp.quote(author_of_book)})/)
+		   		amazon_result = search_results.link_with(:text=> /(Amazon.ca|Amazon.com #{Regexp.quote(title_of_book)} #{Regexp.quote(author_of_book)})/).click 
+				  	 if amazon_result.uri.to_s.match(/.ca/) && amazon_result.search("#detail_bullets_id").at("li:contains('Publisher:')")
+			    		@publisher = amazon_result.search("#detail_bullets_id").at("li:contains('Publisher:')").text 	
+			    	elsif amazon_result.link_with(:text=>/#{Regexp.quote(title_of_book)}/)
+			    		inner_amazonca = amazon_result.link_with(:text=>/#{Regexp.quote(title_of_book)}/).click
+			    		begin
+			    		@publisher = inner_amazonca.search("#detail_bullets_id").at("li:contains('Publisher:')").text
+			    		rescue NoMethodError
+			    		@publisher = "exception handled"
+			    		end
+			    	elsif 
+			    		amazon_result.uri.to_s.match(/.com/) && amazon_result.search("#detail-bullets").at("li:contains('Publisher: ')")
+			    		@publisher = amazon_result.search("#detail-bullets").at("li:contains('Publisher:')").text 	
+			    	elsif amazon_result.uri.to_s.match(/.com/) &&  amazon_result.link_with(:text=>/#{Regexp.quote(title_of_book)}/)
+			    			inner_amazoncom = amazon_result.link_with(:text=>/#{Regexp.quote(title_of_book)}/).click
+			    		@publisher = inner_amazoncom.search("#detail-bullets").at("li:contains('Publisher:')").text 	
+			    	else
+			    		@publisher = "undiggable!"
+			    	end
+	    else 	@publisher = "Google initial search ain't panning"
+
 	    end
-	    	@publisher = @publisher.gsub("Publisher: ", "")
-	    return @publisher
+	    		@publisher = @publisher.gsub("Publisher: ", "")
+	    		return @publisher
 		end
+		
 	end	
 
 	collect_books

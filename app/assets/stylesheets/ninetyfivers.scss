@@ -298,7 +298,7 @@ body {
             margin-top: 4%;
         }
         a {
-            color: black;
+            color: white;
             font-weight: bolder;
             // text-decoration: underline;
             &:hover {
@@ -344,7 +344,13 @@ body {
     }
 }
 
+#reader_tweet_content {
+    color: red;  
+}
 
+#reader_tweet_content {
+    color: red;
+}
 
 // MEDIA QUERIES
 @media only screen and (max-width: 1199px) {

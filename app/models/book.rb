@@ -5,7 +5,8 @@ class Book < ActiveRecord::Base
 	validates   :title,    			presence: true
 	validates   :publisher, 		presence: true 
 	validates 	:hashed_book,	    presence: true, uniqueness: { case_sensitive: false }
-	scope		:displayable, -> { where(displayable: true) }
+	scope		:displayable,   ->  { where(displayable: true) }
+	scope 		:undisplayable, ->  { where(displayable: false) }
 
 end
 
