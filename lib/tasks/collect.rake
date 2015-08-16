@@ -1,7 +1,6 @@
 namespace :collect do 
 
 desc "Collects all new Readers"
-
 	task :new_readers => :environment do
 
 	AUTHOR     = /(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)(([a-zA-Z,.'-]+\s?){1,3})/
@@ -32,15 +31,25 @@ desc "Collects all new Readers"
 				        @reader  = Reader.create(name: @tweet_user, tweet_content: [@tweet_content])	  
 				end
 			end	
+			collect_readers
 		end
+		
+
+	end
 
 	# COLLECTBOOKS
 
+desc "Collects all new Books"
+	task :new_books => :environment do
+
+	AUTHOR     = /(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)(([a-zA-Z,.'-]+\s?){1,3})/
+	BOOK_TITLE = /(([a-zA-Z,.'-]+\s?){1,4})(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)/
+	
 	def collect_books 	
-		Reader.all.each do |reader|
+	@readers_to_scour = Reader.where('updated_at >= :one_week_ago', :one_week_ago => Time.now - 7.days)
 
+		@readers_to_scour.each do |reader|
 			@hashtag_tweet=reader.tweet_content.last
-
 				if webscrape_possible(@hashtag_tweet)
 					# check if book already exists and save if so.
 					if book_exists?(@book_title_match, @author_match)
@@ -143,13 +152,9 @@ desc "Collects all new Readers"
 			    end
 
 			end
-			@publisher = @publisher.gsub("Publisher: ", "")
-	    	return @publisher
-	end	
-
-	collect_books
-	collect_readers
-	
+					@publisher = @publisher.gsub("Publisher: ", "")
+	    			return @publisher
+		end	
+		collect_books
 	end
-
-end
+ end
