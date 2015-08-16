@@ -10,7 +10,7 @@
 	</section>
 	<article class="row stats-wrap">
 		<section class="reader-stats col-md-3 col-md-offset-2">
-			<h4>CURRENT READERS: <%= Reader.all.length %></h4>
+			<h4>CURRENT READERS: <%= @displayable_readers.all.length %></h4>
 		</section>
 		<section class="book-stats col-md-3 col-md-offset-2">
 			<h4>BOOKS READ: <%= Book.all.length %></h4>

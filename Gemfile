@@ -32,8 +32,8 @@ gem 'mechanize'
 gem 'nokogiri'
 # Active admin
 gem 'rails_admin'
-# Whenever gem
-gem 'whenever', :require => false
+
+gem 'minitest-reporters'
 
 
 # Use ActiveModel has_secure_password
