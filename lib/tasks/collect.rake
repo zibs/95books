@@ -1,6 +1,7 @@
 namespace :collect do 
 
 desc "Collects all new Readers"
+
 	task :new_readers => :environment do
 
 	AUTHOR     = /(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)(([a-zA-Z,.'-]+\s?){1,3})/
@@ -31,19 +32,8 @@ desc "Collects all new Readers"
 				        @reader  = Reader.create(name: @tweet_user, tweet_content: [@tweet_content])	  
 				end
 			end	
-			collect_readers
 		end
-		
-
-	end
-
 	# COLLECTBOOKS
-
-desc "Collects all new Books"
-	task :new_books => :environment do
-
-	AUTHOR     = /(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)(([a-zA-Z,.'-]+\s?){1,3})/
-	BOOK_TITLE = /(([a-zA-Z,.'-]+\s?){1,4})(by\s|-+\s?|\(+\s?|of\s?|[^RT]\s@\b)/
 	
 	def collect_books 	
 	@readers_to_scour = Reader.where('updated_at >= :one_week_ago', :one_week_ago => Time.now - 7.days)
@@ -152,9 +142,12 @@ desc "Collects all new Books"
 			    end
 
 			end
-					@publisher = @publisher.gsub("Publisher: ", "")
-	    			return @publisher
-		end	
-		collect_books
+			@publisher = @publisher.gsub("Publisher: ", "")
+	    	return @publisher
+	end	
+
+	collect_readers
+	collect_books
+	
 	end
- end
+end
