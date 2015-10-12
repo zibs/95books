@@ -32,7 +32,7 @@ gem 'mechanize'
 gem 'nokogiri'
 # Active admin
 gem 'rails_admin'
-
+gem 'whenever', :require => false
 gem 'minitest-reporters'
 
 
@@ -55,7 +55,7 @@ end
 
   group :production do
   gem 'rails_12factor', '0.0.2'
-  gem 'puma',           '2.11.1'
+  gem 'puma',           '2.14.0'
 end
 
 
